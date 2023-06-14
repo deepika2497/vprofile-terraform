@@ -15,11 +15,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    if (params.DEPLOY_ENV == 'QA') {
-                        checkout([$class: 'GitSCM', branches: [[name: '*/develop']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
-                    } else { 
-                        // For Stage and Prod, switch to master branch
-                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
+                    sshagent(credentials: ['github-creds']) {
+                        if (params.DEPLOY_ENV == 'QA') {
+                            checkout([$class: 'GitSCM', branches: [[name: '*/develop']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
+                        } else { 
+                            // For Stage and Prod, switch to master branch
+                            checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
+                        }
                     }
                 }
             }
