@@ -78,7 +78,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sshagent(credentials: ['ubuntu']) {
+                sshagent(credentials: ['ec2-creds']) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} 'sudo mv ~/vprofile-${version}-${DEPLOY_ENV}.war /var/lib/tomcat9/webapps/'"
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} 'sudo systemctl restart tomcat9'"
                 }
