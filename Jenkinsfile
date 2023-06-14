@@ -12,7 +12,41 @@ pipeline {
         version = ''
     }
     stages {
-        // ... rest of stages same as before
+        stage('Checkout') {
+            steps {
+                script {
+                    if (params.DEPLOY_ENV == 'QA') {
+                        checkout([$class: 'GitSCM', branches: [[name: '*/develop']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
+                    } else { 
+                        // For Stage and Prod, switch to master branch
+                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'git@github.com:ravithejajs/vprofile-app-enterprise.git']]])
+                    }
+                }
+            }
+        }
+        stage('Read POM') {
+            steps {
+                script {
+                    def pom = readMavenPom file: 'pom.xml'
+                    version = pom.version
+                    echo "Project version is: ${version}"
+                }
+            }
+        }
+        stage("Build Artifact") {
+            steps {
+                script {
+                    sh 'mvn clean package -DskipTests'
+                }
+            }
+        }
+        stage("Test") {
+            steps {
+                script {
+                    sh 'mvn test'
+                }
+            }
+        }
         stage("Upload Artifact s3") {
             steps {
                 script {
