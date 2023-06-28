@@ -78,7 +78,7 @@ pipeline {
         }
         stage('Deploy to CodeDeploy') {
             steps {
-                withAWS(region: 'ap-south-1', credentials: 'aws-credentials') {
+                withAWS(region: 'ap-south-1', credentials: 'aws-creds') {
                     // Create a new deployment
                     def deployment = awsDeployCreateDeployment(
                         applicationName: 'vprofile-application',
