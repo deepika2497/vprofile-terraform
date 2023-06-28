@@ -81,7 +81,7 @@ pipeline {
                 script {
                 withAWS(region: 'ap-south-1', credentials: 'aws-creds') {
                     // Create a new deployment
-                    def deployment = awsDeployCreateDeployment(
+                    def deployment = createDeployment(
                         applicationName: 'vprofile-application',
                         deploymentGroupName: 'Vprofile-App-production',
                         revision: [
