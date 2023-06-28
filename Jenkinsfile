@@ -77,8 +77,8 @@ pipeline {
             }
         }
         stage('Deploy to CodeDeploy') {
-            steps {
-                script {
+        steps {
+            script {
                 withAWS(region: 'ap-south-1', credentials: 'aws-creds') {
                     // Create a new deployment
                     def deployment = createDeployment(
@@ -87,8 +87,9 @@ pipeline {
                         revision: [
                             revisionType: 'S3',
                             s3Location: [
-                                bucketName: 'vprofile-bundle',
-                                bundleType: 'zip',
+                                bucket: 'vprofile-bundle',  // use 'bucket' instead of 'bucketName'
+                                key: 'deploy-bundle.zip',  // add this line. Replace 'path-to-your-zip-file' with the path to your application revision
+                                bundleType: 'zip'
                             ]
                         ]
                     )
@@ -97,8 +98,8 @@ pipeline {
                     def deploymentId = deployment.deploymentId
                     awsDeployWaitForDeploymentComplete(deploymentId: deploymentId)
                 }
-             }
             }
         }
-    }
+   }
+}
 }
