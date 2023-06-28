@@ -78,6 +78,7 @@ pipeline {
         }
         stage('Deploy to CodeDeploy') {
             steps {
+                script {
                 withAWS(region: 'ap-south-1', credentials: 'aws-creds') {
                     // Create a new deployment
                     def deployment = awsDeployCreateDeployment(
@@ -96,6 +97,7 @@ pipeline {
                     def deploymentId = deployment.deploymentId
                     awsDeployWaitForDeploymentComplete(deploymentId: deploymentId)
                 }
+             }
             }
         }
     }
