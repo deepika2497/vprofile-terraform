@@ -79,7 +79,7 @@ pipeline {
         steps {
             script {
             def deploymentGroup
-            switch (params.ENVIRONMENT) {
+            switch (params.DEPLOY_ENV) {
                 case 'QA':
                 deploymentGroup = 'Vprofile-App-qa'
                 break
