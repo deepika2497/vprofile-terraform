@@ -9,3 +9,4 @@ if [ -n "$CATALINA_PID" ]; then
 else
     echo "Tomcat is already stopped."
 fi
+rm -rf /var/lib/tomcat9/webapps/*.war
