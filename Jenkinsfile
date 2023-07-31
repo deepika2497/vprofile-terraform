@@ -83,12 +83,13 @@ pipeline {
         stage('Dockerize') {
     steps {
         script {
-            dir ('Docker') {    
-            sh "docker build -t vprofileapp:${version} . "
+            dir('Docker/') {
+                sh "docker build -t vprofileapp:${version} ."
             }
-         }
+        }
     }
 }
+
 
        /*  stage('Deploy to CodeDeploy') {
         steps {
