@@ -83,7 +83,8 @@ pipeline {
         stage('Dockerize') {
     steps {
         script {
-            sh "docker build -t vprofileapp:${version} /var/lib/jenkins/workspace/vprofileapp-docker/Docker"
+            dir ('Docker')
+            sh "docker build -t vprofileapp:${version} ."
         }
     }
 }
