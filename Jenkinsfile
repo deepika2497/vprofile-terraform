@@ -83,7 +83,7 @@ pipeline {
         stage('Dockerize') {
     steps {
         script {
-            dir('Docker/') {
+            dir('vprofile-terraform/Docker') {
                 sh "docker build -t vprofileapp:${version} ."
             }
         }
