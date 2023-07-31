@@ -75,7 +75,7 @@ pipeline {
                // }
             //}
         //}
-        stage('Deploy to CodeDeploy') {
+       /*  stage('Deploy to CodeDeploy') {
         steps {
             script {
             def deploymentGroup
@@ -96,7 +96,7 @@ pipeline {
             sh "aws deploy create-deployment --application-name  vprofile-application --deployment-group-name ${deploymentGroup} --s3-location bucket=vprofile-bundle,key=deploy-bundle.zip,bundleType=zip"
             }
         }
-    }
+    } */
    }
 }
 
