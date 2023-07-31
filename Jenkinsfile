@@ -68,13 +68,13 @@ pipeline {
                 }
             }
         }
-        stage("Upload Artifact s3") {
-            steps {
-                script {
-                    sh "aws s3 cp target/vprofile-${version}.war s3://${S3_BUCKET}/vprofile-${version}-${DEPLOY_ENV}.war"
-                }
-            }
-        }
+       // stage("Upload Artifact s3") {
+         //   steps {
+           //     script {
+             //       sh "aws s3 cp target/vprofile-${version}.war s3://${S3_BUCKET}/vprofile-${version}-${DEPLOY_ENV}.war"
+               // }
+            //}
+        //}
         stage('Deploy to CodeDeploy') {
         steps {
             script {
