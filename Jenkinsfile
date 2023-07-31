@@ -84,9 +84,9 @@ pipeline {
     steps {
         script {
             dir ('Docker') {    
-            sh "docker build -t vprofileapp:${version} ."
-        }
-    }
+            sh "docker build -t vprofileapp:${version} . "
+            }
+         }
     }
 }
 
