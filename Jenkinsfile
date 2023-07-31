@@ -77,13 +77,13 @@ pipeline {
         //}
         stage('Copy') {
             steps {
-                sh 'cp target/*.war Docker'
+                sh 'cp target/*.war Docker/'
             }
         }
         stage('Dockerize') {
     steps {
         script {
-            dir('vprofile-terraform/Docker') {
+            dir('Docker') {
                 sh "docker build -t vprofileapp:${version} ."
             }
         }
