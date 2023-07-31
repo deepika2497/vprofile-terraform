@@ -83,9 +83,10 @@ pipeline {
         stage('Dockerize') {
     steps {
         script {
-            dir ('Docker')
+            dir ('Docker') {    
             sh "docker build -t vprofileapp:${version} ."
         }
+    }
     }
 }
 
