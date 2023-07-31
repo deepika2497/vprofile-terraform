@@ -75,6 +75,20 @@ pipeline {
                // }
             //}
         //}
+        stage('Copy') {
+            steps {
+                sh 'cp target/*.war Docker/'
+            }
+        }
+        stage('Dockerize') {
+            steps {
+                script {
+                    dir('Docker') {
+                        sh "docker build -t vprofileapp:${version} . "
+                    }
+                }
+            }
+        }
        /*  stage('Deploy to CodeDeploy') {
         steps {
             script {
