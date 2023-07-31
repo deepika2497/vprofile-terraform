@@ -17,7 +17,7 @@ pipeline {
                     if (params.DEPLOY_ENV == 'QA') {
                         checkout(
                             [$class: 'GitSCM',
-                            branches: [[name: '*/develop']],
+                            branches: [[name: '*/master']],
                             doGenerateSubmoduleConfigurations: false,
                             extensions: [],
                             submoduleCfg: [],
@@ -77,7 +77,7 @@ pipeline {
         //}
         stage('Copy') {
             steps {
-                sh 'cp target/*.war ../Docker/'
+                sh 'cp target/*.war Docker/'
             }
         }
         stage('Dockerize') {
